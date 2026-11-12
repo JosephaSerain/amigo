@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tirage Amigo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&family=Rubik:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="slides.css">
+</head>
+<body>
+
+<!-- Logo jeton souriant, réutilisé partout -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="smile" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="47" fill="#f4cf14" stroke="#fff" stroke-width="4"/>
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#fbe470" stroke-width="2" opacity=".6"/>
+      <path d="M17 50 Q50 58 83 46 Q78 82 47 82 Q22 80 17 50 Z" fill="#fff"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="tv" id="tv">
+  <div class="screen">
+    <div class="bar">
+      <div class="logo"><span>AMIG<svg><use href="#smile"/></svg></span></div>
+      <div class="title" id="title"></div>
+    </div>
+
+    <div class="board-zone">
+      <div class="results" id="results"></div>
+      <div class="board" id="board">
+        <div class="token" id="token"><svg><use href="#smile"/></svg></div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <div class="age">18</div>
+      <div class="foot-right">
+        <div class="status" id="status"></div>
+        <div class="drawno">N°<span id="drawNo">001</span><svg><use href="#smile"/></svg></div>
+      </div>
+    </div>
+
+    <!-- Brèves du sport, affichées entre les tirages en mode Auto 5 min -->
+    <div class="slides" id="slides">
+      <div id="slideList"></div>
+      <div class="sl-countdown">
+        <span id="slStatus"></span>
+        <span class="sl-drawno">N°<span id="slDrawNo"></span><svg><use href="#smile"/></svg></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <button class="go" id="go">▶ Lancer le tirage</button>
+  <div class="seg" id="mode">
+    <button data-s="0">Manuel</button>
+    <button data-s="60">Auto 1 min</button>
+    <button data-s="300">Auto 5 min</button>
+  </div>
+  <div class="seg" id="pace">
+    <button data-p="1.4">Lent</button>
+    <button data-p="1">Normal</button>
+    <button data-p="0.6">Rapide</button>
+  </div>
+  <button id="fs">⛶ Plein écran</button>
+</div>
+<div class="history" id="history"></div>
+
+<script src="slides.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
