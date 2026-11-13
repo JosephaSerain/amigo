@@ -105,6 +105,12 @@ const SLIDE_SECONDS = 45;
 const SLIDES_INTERVAL = 300; // mode Auto 5 min
 let slideTimer = null;
 
+// Les écrans sont dessinés en 1920 px de large : on les met à l'échelle de l'écran TV
+const slidesBox = $("slides");
+new ResizeObserver(() => {
+  slidesBox.style.setProperty("--sl-scale", slidesBox.clientWidth / 1920);
+}).observe(slidesBox);
+
 function startSlides(start = 0) {
   const box = $("slideList");
   box.innerHTML = SLIDES.map((s) => `<div class="slide">${renderSlide(s)}</div>`).join("");

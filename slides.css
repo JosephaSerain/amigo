@@ -1,105 +1,34 @@
 /* ---------- Écrans « Les brèves du sport » ----------
-   Toutes les tailles sont en cqw (% de la largeur de l'écran TV),
-   pour que l'écran soit identique quelle que soit la taille. */
+   Chaque écran est dessiné en 1920 × 1080 px (voir slides.js) et mis à
+   l'échelle de l'écran TV via --sl-scale (calculé dans script.js). */
 
 .slides {
-  --sl-navy: #15125a;
-  --sl-purple: #4b4594;
-  --sl-lead: #2e2a78;
-  --sl-pill: #eae9f8;
-  --sl-blue: #2f7cf6;
-  --sl-yellow: #ffd21f;
-  --sl-red: #e3262f;
-
   position: absolute; inset: 0; z-index: 10; overflow: hidden;
-  background: #fff; color: var(--sl-navy);
-  font-family: "Nunito", system-ui, sans-serif;
+  background: #fff;
   opacity: 0; pointer-events: none; transition: opacity .6s;
 }
 .screen.show-slides .slides { opacity: 1; }
 
-.slide {
-  position: absolute; inset: 0; padding: 3.3cqw 5cqw 6cqw;
-  display: flex; flex-direction: column;
-  opacity: 0; transition: opacity .7s;
-}
+.slide { position: absolute; inset: 0; opacity: 0; transition: opacity .7s; }
 .slide.on { opacity: 1; }
 
-/* Ronds décoratifs en haut à droite */
-.sl-deco i { position: absolute; border-radius: 50%; }
-.sl-deco .c-blue { width: 38.5cqw; height: 38.5cqw; right: -9.5cqw; top: -12.4cqw; background: #d8e6fb; }
-.sl-deco .c-yellow { width: 15.4cqw; height: 15.4cqw; left: 70.8cqw; top: -6.2cqw; background: #fff3c4; mix-blend-mode: multiply; }
-.sl-deco .c-red { width: 7.8cqw; height: 7.8cqw; left: 86.4cqw; top: 11cqw; background: #e23a42; }
-
-/* En-tête */
-.sl-head { position: relative; display: flex; align-items: center; gap: 1.2cqw; height: 3.8cqw; }
-.sl-tag {
-  background: var(--sl-yellow); color: var(--sl-navy); border-radius: 99cqw;
-  font-family: "Baloo 2", sans-serif; font-weight: 800; font-size: 1.55cqw; text-transform: uppercase;
-  height: 100%; display: flex; align-items: center; padding: 0 1.6cqw; padding-top: .2cqw;
+.sl-canvas {
+  width: 1920px; height: 1080px;
+  transform: scale(var(--sl-scale, 1)); transform-origin: 0 0;
 }
-.sl-context { color: var(--sl-purple); font-weight: 800; font-size: 1.65cqw; text-transform: uppercase; letter-spacing: .08cqw; }
-.sl-brand {
-  margin-left: auto; background: var(--sl-red); color: #fff; border-radius: 99cqw;
-  font-family: "Baloo 2", sans-serif; font-weight: 800; font-size: 1.4cqw; text-transform: uppercase; letter-spacing: .05cqw;
-  height: 3.3cqw; display: flex; align-items: center; padding: .2cqw 1.6cqw 0;
-}
-
-/* Titre et chapô */
-.sl-title {
-  position: relative; margin: 1.6cqw 0 0; max-width: 70cqw;
-  font-family: "Baloo 2", sans-serif; font-weight: 800; font-size: 6.4cqw; line-height: .98; letter-spacing: -.05cqw;
-}
-.sl-lead { position: relative; margin: .9cqw 0 0; max-width: 87cqw; color: var(--sl-lead); font-weight: 800; font-size: 2.05cqw; line-height: 1.45; }
-
-.sl-body { margin-top: auto; position: relative; }
-.sl-note { margin-top: 2cqw; color: var(--sl-purple); font-weight: 800; font-size: 1.55cqw; text-transform: uppercase; letter-spacing: .05cqw; }
-
-/* Éléments communs */
-.sl-pill { background: var(--sl-pill); border-radius: 99cqw; display: flex; align-items: center; font-weight: 800; }
-.sl-dot {
-  display: inline-grid; place-items: center; flex-shrink: 0; border-radius: 50%;
-  font-family: "Baloo 2", sans-serif; font-weight: 800;
-}
-.sl-dot.blue { background: var(--sl-blue); color: #fff; }
-.sl-dot.yellow { background: var(--sl-yellow); color: var(--sl-navy); }
-.sl-list { display: flex; flex-direction: column; gap: .8cqw; }
-
-/* Scores (football, rugby, basket) */
-.sl-scores { display: grid; grid-template-columns: 1fr 1fr; gap: .9cqw 2.9cqw; }
-.sl-match { display: grid; grid-template-columns: 1fr auto auto 1fr; gap: .9cqw; height: 5cqw; padding: 0 1.9cqw; font-size: 1.95cqw; }
-.sl-match .sl-dot { min-width: 4cqw; height: 4cqw; padding: 0 .4cqw; border-radius: 99cqw; font-size: 1.85cqw; padding-top: .2cqw; }
-.sl-match .away { text-align: right; }
-.sl-match .home, .sl-match .away { white-space: nowrap; }
-
-/* Lignes clé / valeur (tennis, curling) */
-.sl-info { justify-content: space-between; height: 4.1cqw; padding: 0 1.9cqw; font-size: 1.65cqw; }
-.sl-info .val { color: #1f5fd6; }
-.sl-sched { height: 4.1cqw; }
-.sl-sched.hi { background: var(--sl-blue); color: #fff; }
-.sl-sched.hi .val { color: #fff; }
-
-/* Tennis : dates + infos */
-.sl-event { display: flex; align-items: center; justify-content: space-between; gap: 3cqw; }
-.sl-event .sl-list { width: 49.7cqw; }
-.sl-dates { display: flex; align-items: center; gap: 1.2cqw; }
-.sl-dot.big { width: 9.9cqw; height: 9.9cqw; font-size: 4.2cqw; padding-top: .4cqw; }
-.sl-chev { color: var(--sl-purple); font-weight: 900; font-size: 2.6cqw; }
-.sl-month { font-family: "Baloo 2", sans-serif; font-weight: 800; font-size: 2.3cqw; text-transform: uppercase; margin-left: 1cqw; padding-top: .3cqw; }
-
-/* Podium (courses hippiques) */
-.sl-rank { height: 5.8cqw; padding: 0 .7cqw; gap: 1.6cqw; font-size: 2.2cqw; }
-.sl-rank .sl-dot { width: 4.5cqw; height: 4.5cqw; font-size: 2.2cqw; padding-top: .2cqw; }
+/* Espacements un peu resserrés pour laisser la place au décompte en bas */
+.sl-canvas > div { padding: 48px 96px 84px !important; gap: 18px !important; }
+.sl-canvas h1 { font-size: 118px !important; }
 
 /* Décompte jusqu'au prochain tirage, en bas à droite (comme sur l'écran Amigo) */
 .sl-countdown {
-  position: absolute; right: 5cqw; bottom: 1.5cqw; z-index: 2;
+  position: absolute; right: 5cqw; bottom: .9cqw; z-index: 2;
   display: flex; align-items: center; gap: 1.2cqw;
-  color: var(--sl-red); font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.7cqw;
+  color: #e3262f; font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.5cqw;
   font-variant-numeric: tabular-nums;
 }
 .sl-drawno {
-  position: relative; display: flex; align-items: center; height: 2.7cqw; padding: 0 3.2cqw 0 .8cqw;
-  background: var(--sl-red); color: #fff; border-radius: .4cqw; font-weight: 700; font-size: 1.8cqw;
+  position: relative; display: flex; align-items: center; height: 2.3cqw; padding: 0 3cqw 0 .8cqw;
+  background: #e3262f; color: #fff; border-radius: .4cqw; font-weight: 700; font-size: 1.5cqw;
 }
-.sl-drawno svg { position: absolute; right: -.6cqw; width: 3.3cqw; height: 3.3cqw; }
+.sl-drawno svg { position: absolute; right: -.6cqw; width: 2.9cqw; height: 2.9cqw; }
